@@ -1,6 +1,7 @@
 const header = document.querySelector(".site-header");
 const glowCards = document.querySelectorAll(".glass-card");
 const revealItems = document.querySelectorAll("[data-reveal]");
+const anchorLinks = document.querySelectorAll('a[href^="#"]');
 
 let targetScrollProgress = 0;
 let currentScrollProgress = 0;
@@ -42,6 +43,34 @@ const updateGlow = (event) => {
   });
 };
 
+const easeInOutCubic = (progress) => {
+  if (progress < 0.5) {
+    return 4 * progress * progress * progress;
+  }
+
+  return 1 - Math.pow(-2 * progress + 2, 3) / 2;
+};
+
+const smoothScrollTo = (targetY, duration = 1500) => {
+  const startY = window.scrollY;
+  const distance = targetY - startY;
+  const startTime = performance.now();
+
+  const step = (now) => {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easedProgress = easeInOutCubic(progress);
+
+    window.scrollTo(0, startY + distance * easedProgress);
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    }
+  };
+
+  requestAnimationFrame(step);
+};
+
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -67,3 +96,28 @@ window.addEventListener("scroll", () => {
 
 window.addEventListener("resize", updateScrollProgress);
 window.addEventListener("pointermove", updateGlow);
+
+anchorLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const hash = link.getAttribute("href");
+
+    if (!hash || hash === "#") {
+      return;
+    }
+
+    const target = document.querySelector(hash);
+
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+    const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight - 18;
+
+    window.setTimeout(() => {
+      smoothScrollTo(targetY);
+    }, 170);
+  });
+});
