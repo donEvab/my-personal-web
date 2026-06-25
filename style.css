@@ -403,20 +403,21 @@ h3 {
 }
 
 .loop-dot::before {
-  animation: dot-to-line 1.9s ease-in-out infinite;
+  animation: dot-to-line 3.2s ease-in-out infinite;
 }
 
 @keyframes dot-to-line {
-  0% {
+  0%,
+  24% {
     clip-path: inset(0 84% 0 0);
   }
 
-  38%,
-  56% {
+  46%,
+  62% {
     clip-path: inset(0 0 0 0);
   }
 
-  86%,
+  84%,
   100% {
     clip-path: inset(0 0 0 100%);
   }
@@ -808,6 +809,11 @@ h3 {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+
+  .loop-dot::before {
+    animation-duration: 3.2s !important;
+    animation-iteration-count: infinite !important;
   }
 }
 
