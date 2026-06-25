@@ -380,41 +380,45 @@ h3 {
 
 .contact-title {
   display: inline-flex;
-  align-items: end;
-  gap: 8px;
+  align-items: baseline;
+  gap: 0.08em;
 }
 
 .loop-dot {
-  width: 0.22em;
+  position: relative;
+  width: 1.35em;
   height: 0.22em;
-  margin-bottom: 0.12em;
-  border-radius: 999px;
-  background: currentColor;
-  transform-origin: left center;
+  display: inline-block;
+  transform: translateY(-0.03em);
 }
 
-#contact.is-contact-active .loop-dot {
-  animation: dot-to-line 1.8s ease-in-out infinite;
+.loop-dot::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  content: "";
+  border-radius: 999px;
+  background: currentColor;
+  clip-path: inset(0 84% 0 0);
+}
+
+#contact.is-contact-active .loop-dot::before {
+  animation: dot-to-line 1.9s ease-in-out infinite;
 }
 
 @keyframes dot-to-line {
-  0%,
+  0% {
+    clip-path: inset(0 84% 0 0);
+  }
+
+  38%,
+  56% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  86%,
   100% {
-    width: 0.22em;
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  45% {
-    width: 1.35em;
-    opacity: 0.95;
-    transform: translateX(0.04em);
-  }
-
-  70% {
-    width: 0.22em;
-    opacity: 0.55;
-    transform: translateX(1.12em);
+    clip-path: inset(0 0 0 100%);
   }
 }
 
