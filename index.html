@@ -3,78 +3,181 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Revan Alfiandri Fauzi</title>
+    <meta
+      name="description"
+      content="Professional portfolio of Revan Alfiandri Fauzi, an Informatics undergraduate focused on Data Engineering, AI, and Automation."
+    />
+    <title>Revan Alfiandri Fauzi | Data Engineering, AI & Automation Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=2" />
   </head>
   <body>
+    <header class="site-header" aria-label="Site header">
+      <a class="site-brand" href="#home" aria-label="Go to home">Personal Web</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Tech Stack</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
     <main class="page-shell">
-      <header class="site-header" aria-label="Site header">
-        <p class="site-brand">Personal Web</p>
-        <nav class="site-nav" aria-label="Primary navigation">
-          <a href="#timeline">Timeline</a>
-        </nav>
-      </header>
-
-      <section class="hero-layout" aria-label="Intro">
-        <div class="hero-card">
-          <div class="hero-topline">
-            <span></span>
-            <span></span>
-          </div>
-
+      <section class="hero-layout" id="home" aria-label="Hero section">
+        <div class="hero-card glass-card">
           <div class="hero-center">
             <div class="hero-portrait-group">
               <figure class="portrait-frame">
                 <img src="assets/revan-profile.jpg" alt="Portrait of Revan Alfiandri Fauzi" />
               </figure>
-              <p class="kicker">Personal Portfolio</p>
+              <p class="kicker">Informatics Portfolio</p>
             </div>
+
             <div class="hero-profile-copy">
+              <p class="eyebrow">Data Engineering - AI - Automation</p>
               <h1>Revan Alfiandri Fauzi</h1>
-              <a class="pill-link" href="mailto:revanalf5@gmail.com">Contact Me</a>
+              <p class="role">Informatics Undergraduate | Aspiring Data Engineer | AI & Automation Builder</p>
+              <p class="hero-tagline">
+                I build data pipelines, automation workflows, and practical software projects.
+              </p>
+              <div class="button-row">
+                <a class="btn btn-primary" href="#projects">View Projects</a>
+                <a class="btn btn-secondary" href="#resume">Download Resume</a>
+                <a class="btn btn-secondary" href="#contact">Contact Me</a>
+              </div>
             </div>
           </div>
 
           <div class="hero-footer">
             <span>Bandung, Indonesia</span>
+            <span>Portfolio-ready for internship applications</span>
           </div>
         </div>
 
-        <h2 class="hero-greeting">Hi!</h2>
+        <aside class="hero-side" aria-label="Focus areas">
+          <p class="hero-greeting">Hi!</p>
+          <div class="focus-list glass-card">
+            <span>Python</span>
+            <span>SQL</span>
+            <span>ETL</span>
+            <span>Automation</span>
+          </div>
+        </aside>
       </section>
 
-      <section class="timeline-section" id="timeline" aria-label="Education timeline">
+      <section class="section-card glass-card" id="about" aria-labelledby="about-title">
         <div class="section-heading">
-          <p class="eyebrow">Education Journey</p>
-          <h2>Timeline</h2>
+          <p class="eyebrow">About Me</p>
+          <h2 id="about-title">Building useful systems with data and automation.</h2>
         </div>
+        <p class="section-copy">
+          I'm an Informatics undergraduate at Telkom University with a strong interest in Data
+          Engineering, AI, and Automation. I enjoy building end-to-end data pipelines, automating
+          workflows, and solving real-world problems using Python, SQL, and modern data tools.
+        </p>
+      </section>
 
+      <section class="section-card glass-card" id="skills" aria-labelledby="skills-title">
+        <div class="section-heading">
+          <p class="eyebrow">Tech Stack</p>
+          <h2 id="skills-title">Tools I use to build practical projects.</h2>
+        </div>
+        <div class="skill-grid">
+          <article class="mini-card">
+            <h3>Programming</h3>
+            <p>Python, SQL, Java, C++</p>
+          </article>
+          <article class="mini-card">
+            <h3>Database</h3>
+            <p>PostgreSQL, MySQL</p>
+          </article>
+          <article class="mini-card">
+            <h3>Data Engineering</h3>
+            <p>ETL, ELT, Airflow, dbt, Docker</p>
+          </article>
+          <article class="mini-card">
+            <h3>BI & Tools</h3>
+            <p>Power BI, Excel, Google Sheets, Git, GitHub</p>
+          </article>
+          <article class="mini-card">
+            <h3>AI & Automation</h3>
+            <p>API Integration, n8n, Gemini/OpenAI API</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-card glass-card" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="eyebrow">Featured Projects</p>
+          <h2 id="projects-title">Selected work for a data-focused portfolio.</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div>
+              <p class="project-label">Library System</p>
+              <h3>PerpusYUK Library Management System</h3>
+              <p>
+                A practical library management project for handling book data, borrowing flows,
+                member records, and administrative operations.
+              </p>
+            </div>
+            <ul class="tag-list" aria-label="Tech stack">
+              <li>Java</li>
+              <li>SQL</li>
+              <li>Database</li>
+            </ul>
+            <div class="button-row">
+              <a class="btn btn-secondary" href="https://github.com/donEvab" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn btn-secondary" href="#" aria-label="PerpusYUK demo placeholder">Demo</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div>
+              <p class="project-label">AI Automation</p>
+              <h3>AI Automation Workflow</h3>
+              <p>
+                An automation workflow concept that connects APIs, AI models, and structured data
+                processing to reduce repetitive tasks.
+              </p>
+            </div>
+            <ul class="tag-list" aria-label="Tech stack">
+              <li>Python</li>
+              <li>API</li>
+              <li>n8n</li>
+              <li>OpenAI API</li>
+            </ul>
+            <div class="button-row">
+              <a class="btn btn-secondary" href="https://github.com/donEvab" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="btn btn-secondary" href="#" aria-label="AI Automation Workflow demo placeholder">Demo</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-card glass-card" id="education" aria-labelledby="education-title">
+        <div class="section-heading">
+          <p class="eyebrow">Education</p>
+          <h2 id="education-title">Academic timeline.</h2>
+        </div>
         <ol class="timeline-list">
           <li class="timeline-item">
             <span class="timeline-dot"></span>
             <div class="timeline-content">
-              <p class="timeline-year">Junior High - Grade 7</p>
-              <h3>SMP Pasundan 1 Bandung</h3>
-            </div>
-          </li>
-          <li class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div class="timeline-content">
-              <p class="timeline-year">Junior High - Grade 8 to 9</p>
-              <h3>SMPN 38 Bandung</h3>
+              <p class="timeline-year">Junior High School</p>
+              <h3>SMPN 1 Solokan Jeruk</h3>
             </div>
           </li>
           <li class="timeline-item">
             <span class="timeline-dot"></span>
             <div class="timeline-content">
               <p class="timeline-year">Senior High School</p>
-              <h3>SMAN 18 Bandung</h3>
+              <h3>SMAN 1 Ciparay</h3>
             </div>
           </li>
           <li class="timeline-item">
@@ -82,13 +185,87 @@
             <div class="timeline-content">
               <p class="timeline-year">University</p>
               <h3>Telkom University</h3>
-              <p>Bachelor of Informatics</p>
+              <p>Informatics Undergraduate</p>
             </div>
           </li>
         </ol>
       </section>
+
+      <section class="section-card glass-card" id="journey" aria-labelledby="journey-title">
+        <div class="section-heading">
+          <p class="eyebrow">Learning Journey</p>
+          <h2 id="journey-title">Roadmap toward data engineering.</h2>
+        </div>
+        <ol class="timeline-list compact-timeline">
+          <li class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-content">
+              <p class="timeline-year">2025</p>
+              <h3>Python, API, and Automation Fundamentals</h3>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-content">
+              <p class="timeline-year">2026</p>
+              <h3>Data Engineering Roadmap</h3>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-content">
+              <p class="timeline-year">Current</p>
+              <h3>Building hire-ready portfolio projects</h3>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-content">
+              <p class="timeline-year">Next</p>
+              <h3>Data Engineer Internship / Junior Data Engineer</h3>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="resume-card glass-card" id="resume" aria-labelledby="resume-title">
+        <div>
+          <p class="eyebrow">Resume</p>
+          <h2 id="resume-title">Want the quick version?</h2>
+          <p class="section-copy">Resume file is coming soon. This button is ready for the final PDF link.</p>
+        </div>
+        <a class="btn btn-primary" href="#" aria-label="Download resume placeholder">Download Resume</a>
+      </section>
+
+      <section class="section-card glass-card" id="contact" aria-labelledby="contact-title">
+        <div class="section-heading">
+          <p class="eyebrow">Contact</p>
+          <h2 id="contact-title">Let's build something useful.</h2>
+        </div>
+        <div class="contact-grid">
+          <a class="contact-item" href="mailto:revanalf5@gmail.com">
+            <span>Email</span>
+            <strong>revanalf5@gmail.com</strong>
+          </a>
+          <a class="contact-item" href="https://github.com/donEvab" target="_blank" rel="noreferrer">
+            <span>GitHub</span>
+            <strong>github.com/donEvab</strong>
+          </a>
+          <a class="contact-item" href="#" aria-label="LinkedIn placeholder">
+            <span>LinkedIn</span>
+            <strong>LinkedIn profile coming soon</strong>
+          </a>
+        </div>
+        <div class="button-row contact-actions">
+          <a class="btn btn-primary" href="mailto:revanalf5@gmail.com">Contact Me</a>
+        </div>
+      </section>
     </main>
 
-    <script src="script.js"></script>
+    <footer class="site-footer">
+      <p>&copy; 2026 Revan Alfiandri Fauzi. Built with HTML, CSS, and JavaScript.</p>
+    </footer>
+
+    <script src="script.js?v=2"></script>
   </body>
 </html>

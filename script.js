@@ -1,8 +1,7 @@
-const glassCards = document.querySelectorAll(".hero-card, .timeline-section");
-const navLinks = document.querySelectorAll('.site-nav a[href^="#"]');
+const glassCards = document.querySelectorAll(".glass-card");
+const anchorLinks = document.querySelectorAll('a[href^="#"]');
 let targetScrollProgress = 0;
 let currentScrollProgress = 0;
-let scrollAnimationFrame;
 
 const updateGlow = (event) => {
   glassCards.forEach((card) => {
@@ -14,8 +13,6 @@ const updateGlow = (event) => {
     card.style.setProperty("--glow-y", `${y}%`);
   });
 };
-
-window.addEventListener("pointermove", updateGlow);
 
 const getScrollProgress = () => {
   const scrollable = document.documentElement.scrollHeight - window.innerHeight;
@@ -32,7 +29,7 @@ const animateScrollMotion = () => {
   }
 
   document.documentElement.style.setProperty("--scroll-progress", currentScrollProgress.toFixed(3));
-  scrollAnimationFrame = requestAnimationFrame(animateScrollMotion);
+  requestAnimationFrame(animateScrollMotion);
 };
 
 const updateScrollMotion = () => {
@@ -67,14 +64,19 @@ const smoothScrollTo = (targetY, duration = 1450) => {
   requestAnimationFrame(step);
 };
 
-updateScrollMotion();
-animateScrollMotion();
+window.addEventListener("pointermove", updateGlow);
 window.addEventListener("scroll", updateScrollMotion, { passive: true });
 window.addEventListener("resize", updateScrollMotion);
 
-navLinks.forEach((link) => {
+anchorLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
-    const target = document.querySelector(link.getAttribute("href"));
+    const hash = link.getAttribute("href");
+
+    if (!hash || hash === "#") {
+      return;
+    }
+
+    const target = document.querySelector(hash);
 
     if (!target) {
       return;
@@ -82,10 +84,15 @@ navLinks.forEach((link) => {
 
     event.preventDefault();
 
-    const targetY = target.getBoundingClientRect().top + window.scrollY - 48;
+    const header = document.querySelector(".site-header");
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+    const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight - 18;
 
     window.setTimeout(() => {
       smoothScrollTo(targetY);
-    }, 180);
+    }, 160);
   });
 });
+
+updateScrollMotion();
+animateScrollMotion();
