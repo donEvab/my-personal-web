@@ -37,8 +37,8 @@ const updateGlow = (event) => {
     const rect = card.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width) * 100;
     const y = ((event.clientY - rect.top) / rect.height) * 100;
-    const tiltX = ((x - 50) / 50) * 4;
-    const tiltY = ((50 - y) / 50) * 4;
+    const tiltX = ((x - 50) / 50) * 1.4;
+    const tiltY = ((50 - y) / 50) * 1.4;
 
     card.style.setProperty("--glow-x", `${x}%`);
     card.style.setProperty("--glow-y", `${y}%`);
