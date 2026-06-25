@@ -2,6 +2,7 @@ const header = document.querySelector(".site-header");
 const glowCards = document.querySelectorAll(".glass-card");
 const revealItems = document.querySelectorAll("[data-reveal]");
 const anchorLinks = document.querySelectorAll('a[href^="#"]');
+const contactSection = document.querySelector("#contact");
 
 let targetScrollProgress = 0;
 let currentScrollProgress = 0;
@@ -98,6 +99,17 @@ revealItems.forEach((item, index) => {
   item.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 70}ms`);
   revealObserver.observe(item);
 });
+
+if (contactSection) {
+  const contactObserver = new IntersectionObserver(
+    ([entry]) => {
+      contactSection.classList.toggle("is-contact-active", entry.isIntersecting);
+    },
+    { threshold: 0.35 }
+  );
+
+  contactObserver.observe(contactSection);
+}
 
 updateHeader();
 updateScrollProgress();
