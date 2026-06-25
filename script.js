@@ -1,6 +1,6 @@
 const header = document.querySelector(".site-header");
 const glowCards = document.querySelectorAll(".glass-card");
-const revealItems = document.querySelectorAll("[data-reveal]");
+const timelineLists = document.querySelectorAll(".timeline-list");
 const anchorLinks = document.querySelectorAll('a[href^="#"]');
 
 let targetScrollProgress = 0;
@@ -82,22 +82,16 @@ const smoothScrollTo = (targetY, duration = 1500) => {
   requestAnimationFrame(step);
 };
 
-const revealObserver = new IntersectionObserver(
+const timelineObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        revealObserver.unobserve(entry.target);
-      }
+      entry.target.classList.toggle("is-chain-active", entry.isIntersecting);
     });
   },
-  { threshold: 0.16 }
+  { rootMargin: "-12% 0px -18% 0px", threshold: 0.18 }
 );
 
-revealItems.forEach((item, index) => {
-  item.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 70}ms`);
-  revealObserver.observe(item);
-});
+timelineLists.forEach((list) => timelineObserver.observe(list));
 
 updateHeader();
 updateScrollProgress();

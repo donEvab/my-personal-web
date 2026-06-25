@@ -658,21 +658,68 @@ h3 {
 }
 
 [data-reveal] {
-  --reveal-delay: 0ms;
-  opacity: 0;
-  transform: translateY(30px) scale(0.985);
-  filter: blur(10px);
-  transition:
-    opacity 720ms ease,
-    transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    filter 720ms ease;
-  transition-delay: var(--reveal-delay);
+  opacity: 1;
+  transform: none;
+  filter: none;
 }
 
 [data-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  transform: none;
+  filter: none;
+}
+
+.timeline-list.is-chain-active::before {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(216, 207, 255, 0.28),
+    rgba(255, 255, 255, 0.86),
+    rgba(159, 124, 255, 0.34),
+    transparent
+  );
+  background-size: 100% 220%;
+  animation: chain-line-flow 2.8s ease-in-out infinite;
+}
+
+.timeline-list.is-chain-active .timeline-dot {
+  animation: chain-dot-bob 1.85s ease-in-out infinite;
+}
+
+.timeline-list.is-chain-active .timeline-item:nth-child(2) .timeline-dot {
+  animation-delay: 0.18s;
+}
+
+.timeline-list.is-chain-active .timeline-item:nth-child(3) .timeline-dot {
+  animation-delay: 0.36s;
+}
+
+.timeline-list.is-chain-active .timeline-item:nth-child(4) .timeline-dot {
+  animation-delay: 0.54s;
+}
+
+@keyframes chain-dot-bob {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 22px rgba(159, 124, 255, 0.48);
+  }
+
+  50% {
+    transform: translateY(-9px) scale(1.08);
+    box-shadow: 0 0 34px rgba(216, 207, 255, 0.72);
+  }
+}
+
+@keyframes chain-line-flow {
+  0%,
+  100% {
+    background-position: 0 0%;
+  }
+
+  50% {
+    background-position: 0 100%;
+  }
 }
 
 @media (max-width: 920px) {
