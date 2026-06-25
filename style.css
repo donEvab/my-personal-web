@@ -402,7 +402,7 @@ h3 {
   clip-path: inset(0 84% 0 0);
 }
 
-#contact.is-contact-active .loop-dot::before {
+.loop-dot::before {
   animation: dot-to-line 1.9s ease-in-out infinite;
 }
 
