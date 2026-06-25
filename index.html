@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Professional portfolio of Revan Alfiandri Fauzi, an Informatics undergraduate focused on Data Engineering, AI, and Automation."
+      content="Portfolio of Revan Alfiandri Fauzi, an Informatics undergraduate focused on Data Engineering, AI, and Automation."
     />
-    <title>Revan Alfiandri Fauzi | Data Engineering, AI & Automation Portfolio</title>
+    <title>Revan Alfiandri Fauzi | Data Engineering Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,254 +18,283 @@
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
-      <a class="site-brand" href="#home" aria-label="Go to home">Personal Web</a>
+      <a class="site-brand" href="#home" aria-label="Revan Alfiandri Fauzi home">
+        Revan Alfiandri Fauzi
+      </a>
       <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#stack">Tech Stack</a>
         <a href="#projects">Projects</a>
-        <a href="#skills">Tech Stack</a>
         <a href="#education">Education</a>
+        <a href="#journey">Journey</a>
+        <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
 
-    <main class="page-shell">
-      <section class="hero-layout" id="home" aria-label="Hero section">
-        <div class="hero-card glass-card">
-          <div class="hero-center">
-            <div class="hero-portrait-group">
-              <figure class="portrait-frame">
-                <img src="assets/revan-profile.jpg" alt="Portrait of Revan Alfiandri Fauzi" />
-              </figure>
-              <p class="kicker">Informatics Portfolio</p>
-            </div>
-
-            <div class="hero-profile-copy">
-              <p class="eyebrow">Data Engineering - AI - Automation</p>
-              <h1>Revan Alfiandri Fauzi</h1>
-              <p class="role">Informatics Undergraduate | Aspiring Data Engineer | AI & Automation Builder</p>
-              <p class="hero-tagline">
-                I build data pipelines, automation workflows, and practical software projects.
-              </p>
-              <div class="button-row">
-                <a class="btn btn-primary" href="#projects">View Projects</a>
-                <a class="btn btn-secondary" href="#resume">Download Resume</a>
-                <a class="btn btn-secondary" href="#contact">Contact Me</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-footer">
-            <span>Bandung, Indonesia</span>
-            <span>Portfolio-ready for internship applications</span>
+    <main>
+      <section class="hero-section section-shell" id="home" aria-labelledby="hero-title">
+        <div class="hero-copy" data-reveal>
+          <p class="eyebrow">Informatics Undergraduate Portfolio</p>
+          <h1 id="hero-title">Revan Alfiandri Fauzi</h1>
+          <p class="hero-role">
+            Informatics Undergraduate | Aspiring Data Engineer | AI &amp; Automation Builder
+          </p>
+          <p class="hero-tagline">
+            I build data pipelines, automation workflows, and practical software projects.
+          </p>
+          <div class="button-row" aria-label="Hero actions">
+            <a class="button button-primary" href="#projects">View Projects</a>
+            <a class="button" href="#resume">
+              Download Resume
+            </a>
+            <a class="button" href="#contact">Contact Me</a>
           </div>
         </div>
 
-        <aside class="hero-side" aria-label="Focus areas">
-          <p class="hero-greeting">Hi!</p>
-          <div class="focus-list glass-card">
-            <span>Python</span>
-            <span>SQL</span>
-            <span>ETL</span>
-            <span>Automation</span>
+        <aside class="profile-card glass-card" aria-label="Profile summary" data-reveal>
+          <figure class="portrait-frame">
+            <img src="assets/revan-profile.jpg" alt="Portrait of Revan Alfiandri Fauzi" />
+          </figure>
+          <div>
+            <p class="profile-location">Bandung, Indonesia</p>
+            <p class="profile-focus">Data Engineering, AI, Automation</p>
           </div>
         </aside>
       </section>
 
-      <section class="section-card glass-card" id="about" aria-labelledby="about-title">
-        <div class="section-heading">
+      <section class="content-section section-shell" id="about" aria-labelledby="about-title">
+        <div class="section-heading" data-reveal>
           <p class="eyebrow">About Me</p>
-          <h2 id="about-title">Building useful systems with data and automation.</h2>
+          <h2 id="about-title">Building practical systems from data to automation.</h2>
         </div>
-        <p class="section-copy">
-          I'm an Informatics undergraduate at Telkom University with a strong interest in Data
-          Engineering, AI, and Automation. I enjoy building end-to-end data pipelines, automating
-          workflows, and solving real-world problems using Python, SQL, and modern data tools.
-        </p>
+        <div class="glass-card about-card" data-reveal>
+          <p>
+            I'm an Informatics undergraduate at Telkom University with a strong interest in Data
+            Engineering, AI, and Automation. I enjoy building end-to-end data pipelines, automating
+            workflows, and solving real-world problems using Python, SQL, and modern data tools.
+          </p>
+        </div>
       </section>
 
-      <section class="section-card glass-card" id="skills" aria-labelledby="skills-title">
-        <div class="section-heading">
+      <section class="content-section section-shell" id="stack" aria-labelledby="stack-title">
+        <div class="section-heading" data-reveal>
           <p class="eyebrow">Tech Stack</p>
-          <h2 id="skills-title">Tools I use to build practical projects.</h2>
+          <h2 id="stack-title">Tools I use to build, ship, and learn.</h2>
         </div>
         <div class="skill-grid">
-          <article class="mini-card">
+          <article class="glass-card skill-card" data-reveal>
             <h3>Programming</h3>
-            <p>Python, SQL, Java, C++</p>
+            <ul class="tag-list">
+              <li>Python</li>
+              <li>SQL</li>
+              <li>Java</li>
+              <li>C++</li>
+            </ul>
           </article>
-          <article class="mini-card">
+          <article class="glass-card skill-card" data-reveal>
             <h3>Database</h3>
-            <p>PostgreSQL, MySQL</p>
+            <ul class="tag-list">
+              <li>PostgreSQL</li>
+              <li>MySQL</li>
+            </ul>
           </article>
-          <article class="mini-card">
+          <article class="glass-card skill-card" data-reveal>
             <h3>Data Engineering</h3>
-            <p>ETL, ELT, Airflow, dbt, Docker</p>
+            <ul class="tag-list">
+              <li>ETL</li>
+              <li>ELT</li>
+              <li>Airflow</li>
+              <li>dbt</li>
+              <li>Docker</li>
+            </ul>
           </article>
-          <article class="mini-card">
-            <h3>BI & Tools</h3>
-            <p>Power BI, Excel, Google Sheets, Git, GitHub</p>
+          <article class="glass-card skill-card" data-reveal>
+            <h3>BI &amp; Tools</h3>
+            <ul class="tag-list">
+              <li>Power BI</li>
+              <li>Excel</li>
+              <li>Google Sheets</li>
+              <li>Git</li>
+              <li>GitHub</li>
+            </ul>
           </article>
-          <article class="mini-card">
-            <h3>AI & Automation</h3>
-            <p>API Integration, n8n, Gemini/OpenAI API</p>
+          <article class="glass-card skill-card" data-reveal>
+            <h3>AI &amp; Automation</h3>
+            <ul class="tag-list">
+              <li>API Integration</li>
+              <li>n8n</li>
+              <li>Gemini/OpenAI API</li>
+            </ul>
           </article>
         </div>
       </section>
 
-      <section class="section-card glass-card" id="projects" aria-labelledby="projects-title">
-        <div class="section-heading">
+      <section class="content-section section-shell" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading" data-reveal>
           <p class="eyebrow">Featured Projects</p>
-          <h2 id="projects-title">Selected work for a data-focused portfolio.</h2>
+          <h2 id="projects-title">Portfolio projects for data and automation work.</h2>
         </div>
         <div class="project-grid">
-          <article class="project-card">
+          <article class="glass-card project-card" data-reveal>
             <div>
-              <p class="project-label">Library System</p>
+              <p class="project-type">Library Management System</p>
               <h3>PerpusYUK Library Management System</h3>
               <p>
-                A practical library management project for handling book data, borrowing flows,
-                member records, and administrative operations.
+                A practical library management system concept for organizing books, members,
+                borrowing flows, and administrative records with a clean software structure.
               </p>
             </div>
-            <ul class="tag-list" aria-label="Tech stack">
-              <li>Java</li>
+            <ul class="tag-list">
+              <li>Python</li>
               <li>SQL</li>
-              <li>Database</li>
+              <li>Database Design</li>
             </ul>
             <div class="button-row">
-              <a class="btn btn-secondary" href="https://github.com/donEvab" target="_blank" rel="noreferrer">GitHub</a>
-              <a class="btn btn-secondary" href="#" aria-label="PerpusYUK demo placeholder">Demo</a>
+              <a class="button button-small" href="https://github.com/donEvab" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a class="button button-small" href="#" aria-label="PerpusYUK demo placeholder">Demo</a>
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="glass-card project-card" data-reveal>
             <div>
-              <p class="project-label">AI Automation</p>
+              <p class="project-type">AI Automation</p>
               <h3>AI Automation Workflow</h3>
               <p>
-                An automation workflow concept that connects APIs, AI models, and structured data
-                processing to reduce repetitive tasks.
+                An automation workflow project focused on connecting APIs, processing structured
+                inputs, and using AI services to reduce repetitive manual work.
               </p>
             </div>
-            <ul class="tag-list" aria-label="Tech stack">
-              <li>Python</li>
-              <li>API</li>
+            <ul class="tag-list">
               <li>n8n</li>
-              <li>OpenAI API</li>
+              <li>API Integration</li>
+              <li>Gemini/OpenAI API</li>
             </ul>
             <div class="button-row">
-              <a class="btn btn-secondary" href="https://github.com/donEvab" target="_blank" rel="noreferrer">GitHub</a>
-              <a class="btn btn-secondary" href="#" aria-label="AI Automation Workflow demo placeholder">Demo</a>
+              <a class="button button-small" href="https://github.com/donEvab" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a class="button button-small" href="#" aria-label="AI Automation Workflow demo placeholder">Demo</a>
             </div>
           </article>
         </div>
       </section>
 
-      <section class="section-card glass-card" id="education" aria-labelledby="education-title">
-        <div class="section-heading">
+      <section class="content-section section-shell" id="education" aria-labelledby="education-title">
+        <div class="section-heading" data-reveal>
           <p class="eyebrow">Education</p>
-          <h2 id="education-title">Academic timeline.</h2>
+          <h2 id="education-title">Academic foundation.</h2>
         </div>
-        <ol class="timeline-list">
-          <li class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div class="timeline-content">
-              <p class="timeline-year">Junior High School</p>
+        <ol class="timeline-list" aria-label="Education timeline">
+          <li class="timeline-item" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-content glass-card">
+              <p class="timeline-label">Junior High School</p>
               <h3>SMPN 1 Solokan Jeruk</h3>
             </div>
           </li>
-          <li class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div class="timeline-content">
-              <p class="timeline-year">Senior High School</p>
+          <li class="timeline-item" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-content glass-card">
+              <p class="timeline-label">Senior High School</p>
               <h3>SMAN 1 Ciparay</h3>
             </div>
           </li>
-          <li class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div class="timeline-content">
-              <p class="timeline-year">University</p>
+          <li class="timeline-item" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-content glass-card">
+              <p class="timeline-label">University</p>
               <h3>Telkom University</h3>
-              <p>Informatics Undergraduate</p>
+              <p>Informatics</p>
             </div>
           </li>
         </ol>
       </section>
 
-      <section class="section-card glass-card" id="journey" aria-labelledby="journey-title">
-        <div class="section-heading">
+      <section class="content-section section-shell" id="journey" aria-labelledby="journey-title">
+        <div class="section-heading" data-reveal>
           <p class="eyebrow">Learning Journey</p>
-          <h2 id="journey-title">Roadmap toward data engineering.</h2>
+          <h2 id="journey-title">Roadmap toward Data Engineering.</h2>
         </div>
-        <ol class="timeline-list compact-timeline">
-          <li class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div class="timeline-content">
-              <p class="timeline-year">2025</p>
+        <ol class="timeline-list" aria-label="Learning journey timeline">
+          <li class="timeline-item" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-content glass-card">
+              <p class="timeline-label">2025</p>
               <h3>Python, API, and Automation Fundamentals</h3>
             </div>
           </li>
-          <li class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div class="timeline-content">
-              <p class="timeline-year">2026</p>
+          <li class="timeline-item" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-content glass-card">
+              <p class="timeline-label">2026</p>
               <h3>Data Engineering Roadmap</h3>
             </div>
           </li>
-          <li class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div class="timeline-content">
-              <p class="timeline-year">Current</p>
+          <li class="timeline-item" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-content glass-card">
+              <p class="timeline-label">Current</p>
               <h3>Building hire-ready portfolio projects</h3>
             </div>
           </li>
-          <li class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div class="timeline-content">
-              <p class="timeline-year">Next</p>
+          <li class="timeline-item" data-reveal>
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-content glass-card">
+              <p class="timeline-label">Next</p>
               <h3>Data Engineer Internship / Junior Data Engineer</h3>
             </div>
           </li>
         </ol>
       </section>
 
-      <section class="resume-card glass-card" id="resume" aria-labelledby="resume-title">
-        <div>
-          <p class="eyebrow">Resume</p>
-          <h2 id="resume-title">Want the quick version?</h2>
-          <p class="section-copy">Resume file is coming soon. This button is ready for the final PDF link.</p>
+      <section class="resume-section section-shell" id="resume" aria-labelledby="resume-title">
+        <div class="resume-panel glass-card" data-reveal>
+          <div>
+            <p class="eyebrow">Resume</p>
+            <h2 id="resume-title">Ready for internship opportunities.</h2>
+            <p>
+              Download my resume for a concise overview of my education, technical stack, and
+              current project direction.
+            </p>
+          </div>
+          <a class="button button-primary" href="#" aria-label="Download resume placeholder">
+            Download Resume
+          </a>
         </div>
-        <a class="btn btn-primary" href="#" aria-label="Download resume placeholder">Download Resume</a>
       </section>
 
-      <section class="section-card glass-card" id="contact" aria-labelledby="contact-title">
-        <div class="section-heading">
+      <section class="content-section section-shell" id="contact" aria-labelledby="contact-title">
+        <div class="section-heading" data-reveal>
           <p class="eyebrow">Contact</p>
-          <h2 id="contact-title">Let's build something useful.</h2>
+          <h2 id="contact-title">Let's connect.</h2>
         </div>
         <div class="contact-grid">
-          <a class="contact-item" href="mailto:revanalf5@gmail.com">
+          <a class="glass-card contact-card" href="mailto:revanalf5@gmail.com" data-reveal>
             <span>Email</span>
             <strong>revanalf5@gmail.com</strong>
           </a>
-          <a class="contact-item" href="https://github.com/donEvab" target="_blank" rel="noreferrer">
+          <a class="glass-card contact-card" href="https://github.com/donEvab" target="_blank" rel="noreferrer" data-reveal>
             <span>GitHub</span>
             <strong>github.com/donEvab</strong>
           </a>
-          <a class="contact-item" href="#" aria-label="LinkedIn placeholder">
+          <a class="glass-card contact-card" href="#" data-reveal>
             <span>LinkedIn</span>
-            <strong>LinkedIn profile coming soon</strong>
+            <strong>LinkedIn profile placeholder</strong>
           </a>
         </div>
-        <div class="button-row contact-actions">
-          <a class="btn btn-primary" href="mailto:revanalf5@gmail.com">Contact Me</a>
+        <div class="contact-action" data-reveal>
+          <a class="button button-primary" href="mailto:revanalf5@gmail.com">Contact Me</a>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>&copy; 2026 Revan Alfiandri Fauzi. Built with HTML, CSS, and JavaScript.</p>
+      <p>© 2026 Revan Alfiandri Fauzi. Built with HTML, CSS, and JavaScript.</p>
     </footer>
 
-    <script src="script.js?v=2"></script>
+    <script src="script.js"></script>
   </body>
 </html>
