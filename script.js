@@ -37,11 +37,22 @@ const updateGlow = (event) => {
     const rect = card.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width) * 100;
     const y = ((event.clientY - rect.top) / rect.height) * 100;
+    const tiltX = ((x - 50) / 50) * 4;
+    const tiltY = ((50 - y) / 50) * 4;
 
     card.style.setProperty("--glow-x", `${x}%`);
     card.style.setProperty("--glow-y", `${y}%`);
+    card.style.setProperty("--tilt-x", `${tiltX.toFixed(2)}deg`);
+    card.style.setProperty("--tilt-y", `${tiltY.toFixed(2)}deg`);
   });
 };
+
+glowCards.forEach((card) => {
+  card.addEventListener("pointerleave", () => {
+    card.style.setProperty("--tilt-x", "0deg");
+    card.style.setProperty("--tilt-y", "0deg");
+  });
+});
 
 const easeInOutCubic = (progress) => {
   if (progress < 0.5) {
