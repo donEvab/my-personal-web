@@ -281,6 +281,24 @@ h3 {
   transform: translateY(-4px);
 }
 
+.glass-card::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  border-radius: inherit;
+  background:
+    linear-gradient(100deg, rgba(255, 255, 255, 0.22), transparent 22% 78%, rgba(216, 207, 255, 0.12)),
+    radial-gradient(ellipse at 50% -10%, rgba(255, 255, 255, 0.28), transparent 34%),
+    radial-gradient(ellipse at 50% 112%, rgba(159, 124, 255, 0.18), transparent 30%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    inset 18px 0 32px rgba(255, 255, 255, 0.045),
+    inset -18px 0 32px rgba(159, 124, 255, 0.055);
+  opacity: 0.9;
+}
+
 .glass-card:hover::before {
   opacity: 1;
 }
@@ -731,5 +749,59 @@ h3 {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+}
+
+.skill-grid {
+  align-items: stretch;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.skill-card,
+.skill-card:nth-child(4),
+.skill-card:nth-child(5) {
+  grid-column: auto;
+  min-height: 132px;
+  padding: 16px;
+}
+
+.skill-card h3 {
+  font-size: 1rem;
+}
+
+.skill-card .tag-list {
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.skill-card .tag-list li {
+  padding: 6px 8px;
+  font-size: 0.76rem;
+}
+
+.contact-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.contact-card {
+  min-height: 98px;
+  padding: 14px;
+}
+
+@media (max-width: 980px) {
+  .skill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .skill-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
   }
 }
