@@ -83,7 +83,10 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.16 }
 );
 
-revealItems.forEach((item) => revealObserver.observe(item));
+revealItems.forEach((item, index) => {
+  item.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 70}ms`);
+  revealObserver.observe(item);
+});
 
 updateHeader();
 updateScrollProgress();
