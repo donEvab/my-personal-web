@@ -380,50 +380,83 @@ h3 {
 
 .contact-title {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.08em;
+  align-items: center;
+  gap: 0.1em;
 }
 
 .loop-dot {
   position: relative;
-  width: 1.35em;
-  height: 0.22em;
+  width: 1.45em;
+  height: 0.2em;
   display: inline-block;
-  transform: translateY(-0.03em);
+  transform: translateY(0.14em);
 }
 
-.loop-dot::before {
+.loop-dot::before,
+.loop-dot::after {
   position: absolute;
-  inset: 0 auto 0 0;
-  width: 0.22em;
+  left: 0;
+  top: 50%;
   content: "";
-  border-radius: 999px;
   background: currentColor;
-  transform: scaleX(1);
-  transform-origin: left center;
+  border-radius: 999px;
 }
 
 .loop-dot::before {
-  animation: dot-to-line 3.2s ease-in-out infinite;
+  width: 0.2em;
+  height: 0.2em;
+  transform: translateY(-50%);
+  animation: dot-pulse-hold 3.2s ease-in-out infinite;
 }
 
-@keyframes dot-to-line {
+.loop-dot::after {
+  width: 1.45em;
+  height: 0.16em;
+  background: currentColor;
+  transform-origin: left center;
+  transform: translateY(-50%) scaleX(0);
+  animation: dot-line-sweep 3.2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse-hold {
   0%,
-  24% {
-    width: 0.22em;
-    transform: scaleX(1);
+  25% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
   }
 
-  46%,
-  62% {
-    width: 1.35em;
-    transform: scaleX(1);
-  }
-
-  84%,
+  38%,
   100% {
-    width: 1.35em;
-    transform: scaleX(0);
+    opacity: 0;
+    transform: translateY(-50%) scale(0.92);
+  }
+}
+
+@keyframes dot-line-sweep {
+  0%,
+  26% {
+    opacity: 0;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left center;
+  }
+
+  44%,
+  62% {
+    opacity: 1;
+    transform: translateY(-50%) scaleX(1);
+    transform-origin: left center;
+  }
+
+  78% {
+    opacity: 1;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: right center;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: right center;
   }
 }
 
@@ -815,7 +848,8 @@ h3 {
     transform: none;
   }
 
-  .loop-dot::before {
+  .loop-dot::before,
+  .loop-dot::after {
     animation-duration: 3.2s !important;
     animation-iteration-count: infinite !important;
   }
