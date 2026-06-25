@@ -22,7 +22,7 @@ const updateScrollProgress = () => {
 };
 
 const animateBackground = () => {
-  currentScrollProgress += (targetScrollProgress - currentScrollProgress) * 0.04;
+  currentScrollProgress += (targetScrollProgress - currentScrollProgress) * 0.08;
 
   if (Math.abs(targetScrollProgress - currentScrollProgress) < 0.001) {
     currentScrollProgress = targetScrollProgress;
@@ -54,11 +54,15 @@ glowCards.forEach((card) => {
   });
 });
 
-const easeInOutSine = (progress) => {
-  return -(Math.cos(Math.PI * progress) - 1) / 2;
+const easeInOutCubic = (progress) => {
+  if (progress < 0.5) {
+    return 4 * progress * progress * progress;
+  }
+
+  return 1 - Math.pow(-2 * progress + 2, 3) / 2;
 };
 
-const smoothScrollTo = (targetY, duration = 3200) => {
+const smoothScrollTo = (targetY, duration = 1500) => {
   const startY = window.scrollY;
   const distance = targetY - startY;
   const startTime = performance.now();
@@ -66,7 +70,7 @@ const smoothScrollTo = (targetY, duration = 3200) => {
   const step = (now) => {
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    const easedProgress = easeInOutSine(progress);
+    const easedProgress = easeInOutCubic(progress);
 
     window.scrollTo(0, startY + distance * easedProgress);
 
@@ -83,12 +87,11 @@ const revealObserver = new IntersectionObserver(
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-      } else {
-        entry.target.classList.remove("is-visible");
+        revealObserver.unobserve(entry.target);
       }
     });
   },
-  { rootMargin: "-8% 0px -12% 0px", threshold: 0.18 }
+  { threshold: 0.16 }
 );
 
 revealItems.forEach((item, index) => {
@@ -129,6 +132,6 @@ anchorLinks.forEach((link) => {
 
     window.setTimeout(() => {
       smoothScrollTo(targetY);
-    }, 220);
+    }, 170);
   });
 });
