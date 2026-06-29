@@ -25,14 +25,14 @@
         }
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20" />
+    <link rel="stylesheet" href="style.css?v=21" />
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
       <a class="site-brand" href="#home" aria-label="Revan Alfiandri Fauzi home">
         Revan Alfiandri Fauzi
       </a>
-      <nav class="site-nav" aria-label="Primary navigation">
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="#about">About</a>
         <a href="#stack">Tech Stack</a>
         <a href="#projects">Projects</a>
@@ -41,6 +41,11 @@
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="nav-toggle-line" aria-hidden="true"></span>
+        <span class="nav-toggle-line" aria-hidden="true"></span>
+        <span class="nav-toggle-text">Menu</span>
+      </button>
       <button class="theme-toggle" type="button" aria-label="Toggle color theme">
         <span class="theme-toggle-indicator" aria-hidden="true"></span>
         <span class="theme-toggle-text">Light</span>
@@ -325,6 +330,6 @@
       <p>&copy; 2026 Revan Alfiandri Fauzi. Built with HTML, CSS, and JavaScript.</p>
     </footer>
 
-    <script src="script.js?v=20"></script>
+    <script src="script.js?v=21"></script>
   </body>
 </html>

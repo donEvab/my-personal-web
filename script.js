@@ -3,11 +3,15 @@ const glowCards = document.querySelectorAll(".glass-card");
 const revealItems = document.querySelectorAll("[data-reveal]");
 const anchorLinks = document.querySelectorAll('a[href^="#"]');
 const contactSection = document.querySelector("#contact");
+const siteNav = document.querySelector(".site-nav");
+const navToggle = document.querySelector(".nav-toggle");
+const navToggleText = document.querySelector(".nav-toggle-text");
 const themeToggle = document.querySelector(".theme-toggle");
 const themeToggleText = document.querySelector(".theme-toggle-text");
 
 let targetScrollProgress = 0;
 let currentScrollProgress = 0;
+const mobileNavQuery = window.matchMedia("(max-width: 760px)");
 
 const savedTheme = localStorage.getItem("portfolio-theme");
 const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
@@ -26,6 +30,32 @@ const setTheme = (theme) => {
 };
 
 setTheme(savedTheme || (prefersLight ? "light" : "dark"));
+
+const syncNavigationState = () => {
+  if (!header || !navToggle || !siteNav) {
+    return;
+  }
+
+  const isMobile = mobileNavQuery.matches;
+
+  if (isMobile) {
+    header.classList.remove("is-nav-hidden");
+    header.classList.toggle("is-nav-visible", header.classList.contains("is-nav-open"));
+  } else {
+    header.classList.remove("is-nav-open");
+    header.classList.toggle("is-nav-visible", !header.classList.contains("is-nav-hidden"));
+  }
+
+  const isVisible = isMobile
+    ? header.classList.contains("is-nav-open")
+    : !header.classList.contains("is-nav-hidden");
+
+  navToggle.setAttribute("aria-expanded", String(isVisible));
+
+  if (navToggleText) {
+    navToggleText.textContent = isVisible ? "Hide" : "Menu";
+  }
+};
 
 const updateHeader = () => {
   header.classList.toggle("is-scrolled", window.scrollY > 16);
@@ -133,6 +163,7 @@ if (contactSection) {
 
 updateHeader();
 updateScrollProgress();
+syncNavigationState();
 animateBackground();
 
 window.addEventListener("scroll", () => {
@@ -142,6 +173,22 @@ window.addEventListener("scroll", () => {
 
 window.addEventListener("resize", updateScrollProgress);
 window.addEventListener("pointermove", updateGlow);
+
+if (mobileNavQuery.addEventListener) {
+  mobileNavQuery.addEventListener("change", syncNavigationState);
+} else {
+  mobileNavQuery.addListener(syncNavigationState);
+}
+
+navToggle?.addEventListener("click", () => {
+  if (mobileNavQuery.matches) {
+    header.classList.toggle("is-nav-open");
+  } else {
+    header.classList.toggle("is-nav-hidden");
+  }
+
+  syncNavigationState();
+});
 
 themeToggle?.addEventListener("click", () => {
   const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
@@ -165,6 +212,11 @@ anchorLinks.forEach((link) => {
     }
 
     event.preventDefault();
+
+    if (mobileNavQuery.matches) {
+      header.classList.remove("is-nav-open");
+      syncNavigationState();
+    }
 
     const headerHeight = header ? header.getBoundingClientRect().height : 0;
     const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight - 18;
