@@ -3,9 +3,29 @@ const glowCards = document.querySelectorAll(".glass-card");
 const revealItems = document.querySelectorAll("[data-reveal]");
 const anchorLinks = document.querySelectorAll('a[href^="#"]');
 const contactSection = document.querySelector("#contact");
+const themeToggle = document.querySelector(".theme-toggle");
+const themeToggleText = document.querySelector(".theme-toggle-text");
 
 let targetScrollProgress = 0;
 let currentScrollProgress = 0;
+
+const savedTheme = localStorage.getItem("portfolio-theme");
+const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+const setTheme = (theme) => {
+  document.documentElement.dataset.theme = theme;
+
+  if (themeToggleText) {
+    themeToggleText.textContent = theme === "light" ? "Dark" : "Light";
+  }
+
+  if (themeToggle) {
+    const nextTheme = theme === "light" ? "dark" : "light";
+    themeToggle.setAttribute("aria-label", `Switch to ${nextTheme} mode`);
+  }
+};
+
+setTheme(savedTheme || (prefersLight ? "light" : "dark"));
 
 const updateHeader = () => {
   header.classList.toggle("is-scrolled", window.scrollY > 16);
@@ -122,6 +142,13 @@ window.addEventListener("scroll", () => {
 
 window.addEventListener("resize", updateScrollProgress);
 window.addEventListener("pointermove", updateGlow);
+
+themeToggle?.addEventListener("click", () => {
+  const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+
+  localStorage.setItem("portfolio-theme", nextTheme);
+  setTheme(nextTheme);
+});
 
 anchorLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
