@@ -11,7 +11,7 @@ const themeToggleText = document.querySelector(".theme-toggle-text");
 
 let targetScrollProgress = 0;
 let currentScrollProgress = 0;
-const mobileNavQuery = window.matchMedia("(max-width: 760px)");
+const mobileNavQuery = window.matchMedia("(max-width: 900px)");
 
 const savedTheme = localStorage.getItem("portfolio-theme");
 const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
@@ -39,21 +39,19 @@ const syncNavigationState = () => {
   const isMobile = mobileNavQuery.matches;
 
   if (isMobile) {
-    header.classList.remove("is-nav-hidden");
     header.classList.toggle("is-nav-visible", header.classList.contains("is-nav-open"));
   } else {
     header.classList.remove("is-nav-open");
-    header.classList.toggle("is-nav-visible", !header.classList.contains("is-nav-hidden"));
+    header.classList.add("is-nav-visible");
   }
 
-  const isVisible = isMobile
-    ? header.classList.contains("is-nav-open")
-    : !header.classList.contains("is-nav-hidden");
+  const isVisible = isMobile ? header.classList.contains("is-nav-open") : true;
 
   navToggle.setAttribute("aria-expanded", String(isVisible));
+  navToggle.setAttribute("aria-label", isVisible ? "Close navigation menu" : "Open navigation menu");
 
   if (navToggleText) {
-    navToggleText.textContent = isVisible ? "Hide" : "Menu";
+    navToggleText.textContent = isVisible ? "Close" : "Menu";
   }
 };
 
@@ -181,13 +179,37 @@ if (mobileNavQuery.addEventListener) {
 }
 
 navToggle?.addEventListener("click", () => {
-  if (mobileNavQuery.matches) {
-    header.classList.toggle("is-nav-open");
-  } else {
-    header.classList.toggle("is-nav-hidden");
+  if (!mobileNavQuery.matches) {
+    return;
   }
 
+  header.classList.toggle("is-nav-open");
   syncNavigationState();
+});
+
+document.addEventListener("click", (event) => {
+  if (!mobileNavQuery.matches || !header.classList.contains("is-nav-open")) {
+    return;
+  }
+
+  const target = event.target;
+
+  if (target instanceof Node && header.contains(target)) {
+    return;
+  }
+
+  header.classList.remove("is-nav-open");
+  syncNavigationState();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" || !header.classList.contains("is-nav-open")) {
+    return;
+  }
+
+  header.classList.remove("is-nav-open");
+  syncNavigationState();
+  navToggle?.focus();
 });
 
 themeToggle?.addEventListener("click", () => {
