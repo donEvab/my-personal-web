@@ -39,7 +39,10 @@ const syncNavigationState = () => {
   const isMobile = mobileNavQuery.matches;
 
   if (isMobile) {
-    header.classList.toggle("is-nav-visible", header.classList.contains("is-nav-open"));
+    header.classList.toggle(
+      "is-nav-visible",
+      header.classList.contains("is-nav-open"),
+    );
   } else {
     header.classList.remove("is-nav-open");
     header.classList.add("is-nav-visible");
@@ -48,7 +51,10 @@ const syncNavigationState = () => {
   const isVisible = isMobile ? header.classList.contains("is-nav-open") : true;
 
   navToggle.setAttribute("aria-expanded", String(isVisible));
-  navToggle.setAttribute("aria-label", isVisible ? "Close navigation menu" : "Open navigation menu");
+  navToggle.setAttribute(
+    "aria-label",
+    isVisible ? "Close navigation menu" : "Open navigation menu",
+  );
 
   if (navToggleText) {
     navToggleText.textContent = isVisible ? "Close" : "Menu";
@@ -71,13 +77,17 @@ const updateScrollProgress = () => {
 };
 
 const animateBackground = () => {
-  currentScrollProgress += (targetScrollProgress - currentScrollProgress) * 0.08;
+  currentScrollProgress +=
+    (targetScrollProgress - currentScrollProgress) * 0.08;
 
   if (Math.abs(targetScrollProgress - currentScrollProgress) < 0.001) {
     currentScrollProgress = targetScrollProgress;
   }
 
-  document.documentElement.style.setProperty("--scroll-progress", currentScrollProgress.toFixed(3));
+  document.documentElement.style.setProperty(
+    "--scroll-progress",
+    currentScrollProgress.toFixed(3),
+  );
   requestAnimationFrame(animateBackground);
 };
 
@@ -140,7 +150,7 @@ const revealObserver = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.16 }
+  { threshold: 0.16 },
 );
 
 revealItems.forEach((item, index) => {
@@ -151,9 +161,12 @@ revealItems.forEach((item, index) => {
 if (contactSection) {
   const contactObserver = new IntersectionObserver(
     ([entry]) => {
-      contactSection.classList.toggle("is-contact-active", entry.isIntersecting);
+      contactSection.classList.toggle(
+        "is-contact-active",
+        entry.isIntersecting,
+      );
     },
-    { threshold: 0.35 }
+    { threshold: 0.35 },
   );
 
   contactObserver.observe(contactSection);
@@ -164,10 +177,14 @@ updateScrollProgress();
 syncNavigationState();
 animateBackground();
 
-window.addEventListener("scroll", () => {
-  updateHeader();
-  updateScrollProgress();
-}, { passive: true });
+window.addEventListener(
+  "scroll",
+  () => {
+    updateHeader();
+    updateScrollProgress();
+  },
+  { passive: true },
+);
 
 window.addEventListener("resize", updateScrollProgress);
 window.addEventListener("pointermove", updateGlow);
@@ -213,7 +230,8 @@ document.addEventListener("keydown", (event) => {
 });
 
 themeToggle?.addEventListener("click", () => {
-  const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+  const nextTheme =
+    document.documentElement.dataset.theme === "light" ? "dark" : "light";
 
   localStorage.setItem("portfolio-theme", nextTheme);
   setTheme(nextTheme);
@@ -241,7 +259,8 @@ anchorLinks.forEach((link) => {
     }
 
     const headerHeight = header ? header.getBoundingClientRect().height : 0;
-    const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight - 18;
+    const targetY =
+      target.getBoundingClientRect().top + window.scrollY - headerHeight - 18;
 
     window.setTimeout(() => {
       smoothScrollTo(targetY);

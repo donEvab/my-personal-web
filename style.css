@@ -49,8 +49,16 @@ body {
   font-family: "Inter", Arial, sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 78% 4%, color-mix(in srgb, var(--primary) 22%, transparent), transparent 24rem),
-    radial-gradient(circle at 8% 32%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 24rem),
+    radial-gradient(
+      circle at 78% 4%,
+      color-mix(in srgb, var(--primary) 22%, transparent),
+      transparent 24rem
+    ),
+    radial-gradient(
+      circle at 8% 32%,
+      color-mix(in srgb, var(--accent) 11%, transparent),
+      transparent 24rem
+    ),
     linear-gradient(180deg, var(--bg), var(--bg-soft));
   overflow-x: hidden;
 }
@@ -71,10 +79,10 @@ body::before {
   top: -540px;
   left: 50%;
   border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
-  box-shadow: inset 0 -24px 54px color-mix(in srgb, var(--primary) 34%, transparent);
+  box-shadow: inset 0 -24px 54px
+    color-mix(in srgb, var(--primary) 34%, transparent);
   filter: blur(2px);
-  transform:
-    translateX(calc(-50% + (var(--scroll-progress) * 34px)))
+  transform: translateX(calc(-50% + (var(--scroll-progress) * 34px)))
     translateY(calc(var(--scroll-progress) * 56px));
 }
 
@@ -84,10 +92,10 @@ body::after {
   right: -300px;
   bottom: -650px;
   border: 1px solid color-mix(in srgb, var(--primary) 32%, transparent);
-  box-shadow: inset 0 22px 52px color-mix(in srgb, var(--primary) 38%, transparent);
+  box-shadow: inset 0 22px 52px
+    color-mix(in srgb, var(--primary) 38%, transparent);
   filter: blur(2px);
-  transform:
-    translateX(calc(var(--scroll-progress) * -160px))
+  transform: translateX(calc(var(--scroll-progress) * -160px))
     translateY(calc(var(--scroll-progress) * -300px));
 }
 
@@ -108,7 +116,9 @@ a {
   background: color-mix(in srgb, var(--bg) 82%, transparent);
   backdrop-filter: blur(18px) saturate(1.1);
   -webkit-backdrop-filter: blur(18px) saturate(1.1);
-  transition: box-shadow 180ms ease, background-color 180ms ease;
+  transition:
+    box-shadow 180ms ease,
+    background-color 180ms ease;
 }
 
 .site-header.is-scrolled {
@@ -133,7 +143,10 @@ a {
   flex-wrap: nowrap;
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 220ms ease, transform 260ms ease, visibility 220ms ease;
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease,
+    visibility 220ms ease;
   visibility: visible;
 }
 
@@ -145,7 +158,10 @@ a {
   font-size: 0.84rem;
   font-weight: 700;
   text-decoration: none;
-  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
 }
 
 .site-nav a:hover,
@@ -168,7 +184,10 @@ a {
   font-size: 0.8rem;
   font-weight: 800;
   cursor: pointer;
-  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
 }
 
 .nav-toggle:hover,
@@ -193,7 +212,9 @@ a {
   border-radius: 999px;
   background: currentColor;
   transform-origin: center;
-  transition: transform 240ms ease, opacity 180ms ease;
+  transition:
+    transform 240ms ease,
+    opacity 180ms ease;
 }
 
 .site-header.is-nav-visible .nav-toggle-line:first-child {
@@ -328,7 +349,10 @@ h3 {
   font-size: 0.9rem;
   font-weight: 800;
   text-decoration: none;
-  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
 }
 
 .button:hover,
@@ -385,10 +409,7 @@ h3 {
 
 .glass-card:hover {
   border-color: var(--line-strong);
-  transform:
-    perspective(1000px)
-    rotateX(var(--tilt-y))
-    rotateY(var(--tilt-x))
+  transform: perspective(1000px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x))
     translateY(-2px);
 }
 
@@ -403,7 +424,11 @@ h3 {
   gap: 26px;
   padding: 28px;
   background:
-    linear-gradient(145deg, color-mix(in srgb, var(--surface-solid) 76%, transparent), color-mix(in srgb, var(--primary) 11%, var(--surface-solid))),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--surface-solid) 76%, transparent),
+      color-mix(in srgb, var(--primary) 11%, var(--surface-solid))
+    ),
     var(--surface-solid);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -415,8 +440,17 @@ h3 {
   inset: 0;
   border-radius: inherit;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 35% 75%, color-mix(in srgb, var(--primary) 10%, transparent)),
-    radial-gradient(ellipse at 28% 0%, rgba(255, 255, 255, 0.12), transparent 32%);
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.14),
+      transparent 35% 75%,
+      color-mix(in srgb, var(--primary) 10%, transparent)
+    ),
+    radial-gradient(
+      ellipse at 28% 0%,
+      rgba(255, 255, 255, 0.12),
+      transparent 32%
+    );
 }
 
 .portrait-frame {
@@ -659,7 +693,12 @@ h3 {
   left: 14px;
   width: 1px;
   content: "";
-  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--primary) 52%, transparent), transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--primary) 52%, transparent),
+    transparent
+  );
 }
 
 .timeline-item {
@@ -678,7 +717,12 @@ h3 {
   margin-top: 18px;
   border: 1px solid color-mix(in srgb, var(--primary) 50%, var(--line));
   border-radius: 50%;
-  background: radial-gradient(circle at 38% 35%, #ffffff, var(--primary-strong) 34%, color-mix(in srgb, var(--primary) 22%, transparent) 66%);
+  background: radial-gradient(
+    circle at 38% 35%,
+    #ffffff,
+    var(--primary-strong) 34%,
+    color-mix(in srgb, var(--primary) 22%, transparent) 66%
+  );
   box-shadow: 0 0 22px color-mix(in srgb, var(--primary) 38%, transparent);
 }
 
@@ -705,7 +749,11 @@ h3 {
   gap: 28px;
   padding: clamp(26px, 5vw, 42px);
   background:
-    linear-gradient(145deg, color-mix(in srgb, var(--surface-solid) 82%, transparent), color-mix(in srgb, var(--primary) 10%, var(--surface-solid))),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--surface-solid) 82%, transparent),
+      color-mix(in srgb, var(--primary) 10%, var(--surface-solid))
+    ),
     var(--surface-solid);
 }
 

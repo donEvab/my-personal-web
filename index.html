@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -18,8 +18,11 @@
       (() => {
         try {
           const savedTheme = localStorage.getItem("portfolio-theme");
-          const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-          document.documentElement.dataset.theme = savedTheme || (prefersLight ? "light" : "dark");
+          const prefersLight = window.matchMedia(
+            "(prefers-color-scheme: light)",
+          ).matches;
+          document.documentElement.dataset.theme =
+            savedTheme || (prefersLight ? "light" : "dark");
         } catch {
           document.documentElement.dataset.theme = "dark";
         }
@@ -29,7 +32,11 @@
   </head>
   <body>
     <header class="site-header" aria-label="Site header">
-      <a class="site-brand" href="#home" aria-label="Revan Alfiandri Fauzi home">
+      <a
+        class="site-brand"
+        href="#home"
+        aria-label="Revan Alfiandri Fauzi home"
+      >
         Revan Alfiandri Fauzi
       </a>
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
@@ -41,44 +48,71 @@
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation menu">
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-controls="site-nav"
+        aria-expanded="false"
+        aria-label="Open navigation menu"
+      >
         <span class="nav-toggle-line" aria-hidden="true"></span>
         <span class="nav-toggle-line" aria-hidden="true"></span>
         <span class="nav-toggle-text">Menu</span>
       </button>
-      <button class="theme-toggle" type="button" aria-label="Toggle color theme">
+      <button
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle color theme"
+      >
         <span class="theme-toggle-indicator" aria-hidden="true"></span>
         <span class="theme-toggle-text">Light</span>
       </button>
     </header>
 
     <main>
-      <section class="hero-section section-shell" id="home" aria-labelledby="hero-title">
+      <section
+        class="hero-section section-shell"
+        id="home"
+        aria-labelledby="hero-title"
+      >
         <div class="hero-copy" data-reveal>
-          <p class="eyebrow">Informatics Undergraduate Portfolio</p>
+          <p class="eyebrow">Personal Portfolio</p>
           <h1 id="hero-title">
             <span>Revan</span>
             <span>Alfiandri</span>
             <span>Fauzi</span>
           </h1>
           <p class="hero-role">
-            Informatics Undergraduate | Aspiring Data Engineer | AI &amp; Automation Builder
+            Informatics Undergraduate | Aspiring Data Engineer | AI &amp;
+            Automation Builder
           </p>
           <p class="hero-tagline">
-            I build data pipelines, automation workflows, and practical software projects.
+            I build data pipelines, automation workflows, and practical software
+            projects.
           </p>
           <div class="button-row" aria-label="Hero actions">
             <a class="button button-primary" href="#projects">View Projects</a>
-            <a class="button" href="assets/resume-revan-alfiandri-fauzi.pdf" download>
+            <a
+              class="button"
+              href="assets/resume-revan-alfiandri-fauzi.pdf"
+              download
+            >
               Download Resume
             </a>
             <a class="button" href="#contact">Contact Me</a>
           </div>
         </div>
 
-        <aside class="profile-card glass-card" aria-label="Profile summary" data-reveal>
+        <aside
+          class="profile-card glass-card"
+          aria-label="Profile summary"
+          data-reveal
+        >
           <figure class="portrait-frame">
-            <img src="assets/revan-profile.jpg" alt="Portrait of Revan Alfiandri Fauzi" />
+            <img
+              src="assets/revan-profile.jpg"
+              alt="Portrait of Revan Alfiandri Fauzi"
+            />
           </figure>
           <div>
             <p class="profile-location">Bandung, Indonesia</p>
@@ -87,21 +121,32 @@
         </aside>
       </section>
 
-      <section class="content-section section-shell" id="about" aria-labelledby="about-title">
+      <section
+        class="content-section section-shell"
+        id="about"
+        aria-labelledby="about-title"
+      >
         <div class="section-heading" data-reveal>
           <p class="eyebrow">About Me</p>
-          <h2 id="about-title">Building practical systems from data to automation.</h2>
+          <h2 id="about-title">
+            Building practical systems from data to automation.
+          </h2>
         </div>
         <div class="glass-card about-card" data-reveal>
           <p>
-            I'm an Informatics undergraduate at Telkom University with a strong interest in Data
-            Engineering, AI, and Automation. I enjoy building end-to-end data pipelines, automating
-            workflows, and solving real-world problems using Python, SQL, and modern data tools.
+            I'm an Informatics undergraduate at Telkom University with a strong
+            interest in Data Engineering, AI, and Automation. I enjoy building
+            end-to-end data pipelines, automating workflows, and solving
+            real-world problems using Python, SQL, and modern data tools.
           </p>
         </div>
       </section>
 
-      <section class="content-section section-shell" id="stack" aria-labelledby="stack-title">
+      <section
+        class="content-section section-shell"
+        id="stack"
+        aria-labelledby="stack-title"
+      >
         <div class="section-heading" data-reveal>
           <p class="eyebrow">Tech Stack</p>
           <h2 id="stack-title">Tools I use to build, ship, and learn.</h2>
@@ -154,10 +199,16 @@
         </div>
       </section>
 
-      <section class="content-section section-shell" id="projects" aria-labelledby="projects-title">
+      <section
+        class="content-section section-shell"
+        id="projects"
+        aria-labelledby="projects-title"
+      >
         <div class="section-heading" data-reveal>
           <p class="eyebrow">Featured Projects</p>
-          <h2 id="projects-title">Portfolio projects for data and automation work.</h2>
+          <h2 id="projects-title">
+            Portfolio projects for data and automation work.
+          </h2>
         </div>
         <div class="project-grid">
           <article class="glass-card project-card" data-reveal>
@@ -165,8 +216,9 @@
               <p class="project-type">Library Management System</p>
               <h3>PerpusYUK Library Management System</h3>
               <p>
-                A practical library management system concept for organizing books, members,
-                borrowing flows, and administrative records with a clean software structure.
+                A practical library management system concept for organizing
+                books, members, borrowing flows, and administrative records with
+                a clean software structure.
               </p>
             </div>
             <ul class="tag-list">
@@ -175,10 +227,21 @@
               <li>Database Design</li>
             </ul>
             <div class="button-row">
-              <a class="button button-small button-primary" href="https://github.com/donEvab/perpusYUK" target="_blank" rel="noreferrer">
+              <a
+                class="button button-small button-primary"
+                href="https://github.com/donEvab/perpusYUK"
+                target="_blank"
+                rel="noreferrer"
+              >
                 GitHub
               </a>
-              <a class="button button-small button-primary" href="https://perpusyuk-web-production.up.railway.app/login.jsp" target="_blank" rel="noreferrer">Demo</a>
+              <a
+                class="button button-small button-primary"
+                href="https://perpusyuk-web-production.up.railway.app/login.jsp"
+                target="_blank"
+                rel="noreferrer"
+                >Demo</a
+              >
             </div>
           </article>
 
@@ -187,8 +250,9 @@
               <p class="project-type">AI Automation</p>
               <h3>AI Automation Workflow</h3>
               <p>
-                An automation workflow project focused on connecting APIs, processing structured
-                inputs, and using AI services to reduce repetitive manual work.
+                An automation workflow project focused on connecting APIs,
+                processing structured inputs, and using AI services to reduce
+                repetitive manual work.
               </p>
             </div>
             <ul class="tag-list">
@@ -197,16 +261,30 @@
               <li>Gemini/OpenAI API</li>
             </ul>
             <div class="button-row">
-              <a class="button button-small button-primary" href="https://github.com/donEvab" target="_blank" rel="noreferrer">
+              <a
+                class="button button-small button-primary"
+                href="https://github.com/donEvab"
+                target="_blank"
+                rel="noreferrer"
+              >
                 GitHub
               </a>
-              <a class="button button-small button-primary" href="#" aria-label="AI Automation Workflow demo placeholder">Demo</a>
+              <a
+                class="button button-small button-primary"
+                href="#"
+                aria-label="AI Automation Workflow demo placeholder"
+                >Demo</a
+              >
             </div>
           </article>
         </div>
       </section>
 
-      <section class="content-section section-shell" id="education" aria-labelledby="education-title">
+      <section
+        class="content-section section-shell"
+        id="education"
+        aria-labelledby="education-title"
+      >
         <div class="section-heading" data-reveal>
           <p class="eyebrow">Education</p>
           <h2 id="education-title">Academic foundation.</h2>
@@ -244,7 +322,11 @@
         </ol>
       </section>
 
-      <section class="content-section section-shell" id="journey" aria-labelledby="journey-title">
+      <section
+        class="content-section section-shell"
+        id="journey"
+        aria-labelledby="journey-title"
+      >
         <div class="section-heading" data-reveal>
           <p class="eyebrow">Learning Journey</p>
           <h2 id="journey-title">Roadmap toward Data Engineering.</h2>
@@ -281,57 +363,103 @@
         </ol>
       </section>
 
-      <section class="resume-section section-shell" id="resume" aria-labelledby="resume-title">
+      <section
+        class="resume-section section-shell"
+        id="resume"
+        aria-labelledby="resume-title"
+      >
         <div class="resume-panel glass-card" data-reveal>
           <div>
             <p class="eyebrow">Resume</p>
             <h2 id="resume-title">Ready for internship opportunities.</h2>
             <p>
-              Download my resume for a concise overview of my education, technical stack, and
-              current project direction.
+              Download my resume for a concise overview of my education,
+              technical stack, and current project direction.
             </p>
           </div>
-          <a class="button button-primary" href="assets/resume-revan-alfiandri-fauzi.pdf" download>
+          <a
+            class="button button-primary"
+            href="assets/resume-revan-alfiandri-fauzi.pdf"
+            download
+          >
             Download Resume
           </a>
         </div>
       </section>
 
-      <section class="content-section section-shell" id="contact" aria-labelledby="contact-title">
+      <section
+        class="content-section section-shell"
+        id="contact"
+        aria-labelledby="contact-title"
+      >
         <div class="section-heading" data-reveal>
           <p class="eyebrow">Contact</p>
-          <h2 id="contact-title" class="contact-title">Let's connect<span class="loop-dot" aria-hidden="true"></span></h2>
+          <h2 id="contact-title" class="contact-title">
+            Let's connect<span class="loop-dot" aria-hidden="true"></span>
+          </h2>
         </div>
         <div class="contact-grid">
-          <a class="glass-card contact-card" href="mailto:revanalf5@gmail.com" data-reveal>
+          <a
+            class="glass-card contact-card"
+            href="mailto:revanalf5@gmail.com"
+            data-reveal
+          >
             <span>Email</span>
             <strong>revanalf5@gmail.com</strong>
           </a>
-          <a class="glass-card contact-card" href="https://github.com/donEvab" target="_blank" rel="noreferrer" data-reveal>
+          <a
+            class="glass-card contact-card"
+            href="https://github.com/donEvab"
+            target="_blank"
+            rel="noreferrer"
+            data-reveal
+          >
             <span>GitHub</span>
             <strong>github.com/donEvab</strong>
           </a>
-          <a class="glass-card contact-card" href="https://www.instagram.com/vaansta/" target="_blank" rel="noreferrer" data-reveal>
+          <a
+            class="glass-card contact-card"
+            href="https://www.instagram.com/vaansta/"
+            target="_blank"
+            rel="noreferrer"
+            data-reveal
+          >
             <span>Instagram</span>
             <strong>@vaansta</strong>
           </a>
-          <a class="glass-card contact-card" href="https://wa.me/6282121484618" target="_blank" rel="noreferrer" data-reveal>
+          <a
+            class="glass-card contact-card"
+            href="https://wa.me/6282121484618"
+            target="_blank"
+            rel="noreferrer"
+            data-reveal
+          >
             <span>WhatsApp</span>
             <strong>082121484618</strong>
           </a>
-          <a class="glass-card contact-card" href="https://www.linkedin.com/in/revan-alfiandri/" target="_blank" rel="noreferrer" data-reveal>
+          <a
+            class="glass-card contact-card"
+            href="https://www.linkedin.com/in/revan-alfiandri/"
+            target="_blank"
+            rel="noreferrer"
+            data-reveal
+          >
             <span>LinkedIn</span>
             <strong>Revan Alfiandri</strong>
           </a>
         </div>
         <div class="contact-action" data-reveal>
-          <a class="button button-primary" href="mailto:revanalf5@gmail.com">Contact Me</a>
+          <a class="button button-primary" href="mailto:revanalf5@gmail.com"
+            >Contact Me</a
+          >
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>&copy; 2026 Revan Alfiandri Fauzi. Built with HTML, CSS, and JavaScript.</p>
+      <p>
+        &copy; 2026 Revan Alfiandri Fauzi. Built with HTML, CSS, and JavaScript.
+      </p>
     </footer>
 
     <script src="script.js?v=22"></script>
