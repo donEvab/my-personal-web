@@ -142,10 +142,30 @@ const setupAsciiGlobe = () => {
   let wasActive = false;
   let lastScrollY = window.scrollY;
   let lastTickTime = 0;
+  let cellAspect = 0.72;
+
+  const measureCellAspect = () => {
+    const styles = window.getComputedStyle(asciiOutput);
+    const fontSize = Number.parseFloat(styles.fontSize) || 8;
+    const lineHeight = Number.parseFloat(styles.lineHeight) || fontSize * 0.82;
+    const canvas = measureCellAspect.canvas || document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    measureCellAspect.canvas = canvas;
+
+    if (!context || !lineHeight) {
+      cellAspect = 0.72;
+      return;
+    }
+
+    context.font = `${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
+    cellAspect = Math.min(Math.max(context.measureText("#").width / lineHeight, 0.5), 0.9);
+  };
 
   const resizeGrid = () => {
     columns = Math.min(maxColumns, Math.max(64, Math.floor(window.innerWidth / 12)));
     rows = Math.min(maxRows, Math.max(34, Math.floor(window.innerHeight / 17)));
+    measureCellAspect();
   };
 
   const smoothstep = (edgeA, edgeB, value) => {
@@ -198,8 +218,10 @@ const setupAsciiGlobe = () => {
     const activity = Math.min(scrollEnergy, 1);
     const isActive = activity > 0.025;
     const rotation = currentScrollProgress * Math.PI * 1.35;
-    const sphereScaleX = 2.88;
+    const isCompactViewport = window.innerWidth < 700;
+    const displayAspect = (columns * cellAspect) / rows;
     const sphereScaleY = 2.06;
+    const sphereScaleX = isCompactViewport ? sphereScaleY * displayAspect : 2.88;
 
     for (let y = 0; y < rows; y += 1) {
       let line = "";
