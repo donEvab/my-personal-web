@@ -63,6 +63,38 @@ body {
   overflow-x: hidden;
 }
 
+.ascii-field {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse at 50% 48%, #000 0 54%, transparent 82%);
+}
+
+.ascii-output {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max-content;
+  margin: 0;
+  color: color-mix(in srgb, var(--primary-strong) 52%, #ffffff);
+  font-family: "Courier New", Consolas, monospace;
+  font-size: clamp(8px, 0.84vw, 13px);
+  font-weight: 800;
+  line-height: 0.82;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: pre;
+  user-select: none;
+  transform: translate3d(-50%, -50%, 0);
+  text-shadow:
+    0 0 8px color-mix(in srgb, var(--primary) 42%, transparent),
+    0 0 24px color-mix(in srgb, var(--primary) 26%, transparent);
+}
+
 body::before,
 body::after {
   position: fixed;
@@ -101,6 +133,13 @@ body::after {
 
 a {
   color: inherit;
+}
+
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 2;
 }
 
 .site-header {
@@ -1023,6 +1062,14 @@ h3 {
 
   .profile-focus {
     font-size: 1.05rem;
+  }
+
+  .ascii-field {
+    opacity: 0.44;
+  }
+
+  .ascii-output {
+    font-size: clamp(6px, 1.55vw, 8px);
   }
 
   .content-section,

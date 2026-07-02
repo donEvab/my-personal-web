@@ -8,9 +8,14 @@ const navToggle = document.querySelector(".nav-toggle");
 const navToggleText = document.querySelector(".nav-toggle-text");
 const themeToggle = document.querySelector(".theme-toggle");
 const themeToggleText = document.querySelector(".theme-toggle-text");
+const asciiOutput = document.querySelector(".ascii-output");
 
 let targetScrollProgress = 0;
 let currentScrollProgress = 0;
+let targetScrollY = window.scrollY;
+let currentScrollY = window.scrollY;
+let isAutomatedScroll = false;
+let lastTouchY = 0;
 const mobileNavQuery = window.matchMedia("(max-width: 900px)");
 
 const savedTheme = localStorage.getItem("portfolio-theme");
@@ -76,6 +81,220 @@ const updateScrollProgress = () => {
   targetScrollProgress = getScrollProgress();
 };
 
+const getMaxScrollY = () =>
+  Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+
+const setSlowScrollTarget = (nextY) => {
+  targetScrollY = Math.min(Math.max(nextY, 0), getMaxScrollY());
+};
+
+const nudgeSlowScroll = (deltaY, multiplier = 0.48) => {
+  const cappedDelta = Math.max(-260, Math.min(260, deltaY));
+  setSlowScrollTarget(targetScrollY + cappedDelta * multiplier);
+};
+
+const animateSlowScroll = () => {
+  const maxScrollY = getMaxScrollY();
+  targetScrollY = Math.min(targetScrollY, maxScrollY);
+  currentScrollY += (targetScrollY - currentScrollY) * 0.075;
+
+  if (Math.abs(targetScrollY - currentScrollY) < 0.25) {
+    currentScrollY = targetScrollY;
+  }
+
+  if (Math.abs(window.scrollY - currentScrollY) > 0.25) {
+    isAutomatedScroll = true;
+    window.scrollTo(0, currentScrollY);
+    window.requestAnimationFrame(() => {
+      isAutomatedScroll = false;
+    });
+  }
+
+  requestAnimationFrame(animateSlowScroll);
+};
+
+const shouldUseNativeScroll = (event) => {
+  if (event.defaultPrevented || event.ctrlKey || event.metaKey) {
+    return true;
+  }
+
+  const target = event.target;
+
+  return (
+    target instanceof Element &&
+    Boolean(target.closest("input, textarea, select, [contenteditable='true']"))
+  );
+};
+
+const setupAsciiGlobe = () => {
+  if (!asciiOutput) {
+    return;
+  }
+
+  const chars = "  ..,:;=+*#%@";
+  const maxColumns = 92;
+  const maxRows = 44;
+  let columns = 0;
+  let rows = 0;
+  let frame = 0;
+  let lastFrame = -1;
+  let scrollEnergy = 0;
+  let wasActive = false;
+  let lastScrollY = window.scrollY;
+  let lastTickTime = 0;
+
+  const resizeGrid = () => {
+    columns = Math.min(maxColumns, Math.max(64, Math.floor(window.innerWidth / 12)));
+    rows = Math.min(maxRows, Math.max(34, Math.floor(window.innerHeight / 17)));
+  };
+
+  const smoothstep = (edgeA, edgeB, value) => {
+    const amount = Math.min(Math.max((value - edgeA) / (edgeB - edgeA), 0), 1);
+    return amount * amount * (3 - 2 * amount);
+  };
+
+  const angleDelta = (angle, center) =>
+    Math.atan2(Math.sin(angle - center), Math.cos(angle - center));
+
+  const geoBlob = (longitude, latitude, centerLongitude, centerLatitude, width, height) => {
+    const dx = angleDelta(longitude, centerLongitude) / width;
+    const dy = (latitude - centerLatitude) / height;
+
+    return Math.max(0, 1 - dx * dx - dy * dy);
+  };
+
+  const pickChar = (value, x, y, isActive, activity) => {
+    if (value < 0.055) {
+      return " ";
+    }
+
+    const dropout = isActive
+      ? Math.sin(frame * 0.72 + x * 2.13 + y * 3.71) +
+        Math.cos(frame * 0.38 + x * 4.91 - y * 1.33)
+      : -2;
+
+    const dropoutLimit = 1.78 - activity * 0.24;
+    const lowValueLimit = 1.34 - activity * 0.2;
+
+    if (isActive && (dropout > dropoutLimit || (value < 0.34 && dropout > lowValueLimit))) {
+      return " ";
+    }
+
+    const shimmer = isActive
+      ? (Math.sin(frame * 0.28 + x * 0.42 + y * 0.16) * 0.075 +
+          Math.cos(frame * 0.16 + x * 0.1 - y * 0.5) * 0.04) *
+        activity
+      : 0;
+    const index = Math.min(
+      chars.length - 1,
+      Math.max(0, Math.floor((value + shimmer) * (chars.length - 1))),
+    );
+
+    return chars[index];
+  };
+
+  const renderAscii = () => {
+    const output = [];
+    const activity = Math.min(scrollEnergy, 1);
+    const isActive = activity > 0.025;
+    const rotation = currentScrollProgress * Math.PI * 1.35;
+    const sphereScaleX = 2.88;
+    const sphereScaleY = 2.06;
+
+    for (let y = 0; y < rows; y += 1) {
+      let line = "";
+
+      for (let x = 0; x < columns; x += 1) {
+        const sphereX = (x / (columns - 1) - 0.5) * sphereScaleX;
+        const sphereY = (y / (rows - 1) - 0.5) * sphereScaleY;
+        const radius = sphereX * sphereX + sphereY * sphereY;
+
+        if (radius > 1) {
+          line += " ";
+          continue;
+        }
+
+        const sphereZ = Math.sqrt(Math.max(0, 1 - radius));
+        const longitude = Math.atan2(sphereX, sphereZ) + rotation;
+        const latitude = Math.asin(Math.min(Math.max(sphereY, -1), 1));
+        const meridian =
+          (1 - smoothstep(0.015, 0.075, Math.abs(Math.sin(longitude * 5)))) *
+          (0.42 + sphereZ * 0.2);
+        const parallel =
+          (1 - smoothstep(0.02, 0.08, Math.abs(Math.sin(latitude * 7)))) *
+          (0.32 + sphereZ * 0.16);
+        const rim = smoothstep(0.72, 0.98, radius) * 0.82;
+        const light = (sphereZ * 0.26 + (sphereX + 1) * 0.06) * 0.72;
+        const continents = Math.min(
+          1,
+          geoBlob(longitude, latitude, -2.15, 0.36, 0.42, 0.34) * 0.85 +
+            geoBlob(longitude, latitude, -1.55, -0.42, 0.28, 0.42) * 0.8 +
+            geoBlob(longitude, latitude, -0.25, 0.08, 0.42, 0.44) * 0.88 +
+            geoBlob(longitude, latitude, 0.56, 0.36, 0.5, 0.34) * 0.84 +
+            geoBlob(longitude, latitude, 1.18, -0.36, 0.28, 0.22) * 0.66,
+        );
+        const coastline =
+          (1 - smoothstep(0.02, 0.18, Math.abs(continents - 0.48))) *
+          (continents > 0 ? 0.35 : 0);
+        const grain =
+          Math.sin(x * 0.37 + longitude * 1.6) *
+          Math.cos(y * 0.53 + latitude * 2.2) *
+          0.025;
+        const value = Math.max(
+          0,
+          Math.min(
+            1,
+            rim + meridian + parallel + continents * 0.74 + coastline + light + grain,
+          ),
+        );
+        line += pickChar(value, x, y, isActive, activity);
+      }
+
+      output.push(line);
+    }
+
+    asciiOutput.textContent = output.join("\n");
+  };
+
+  const tick = (time) => {
+    const elapsed = lastTickTime ? time - lastTickTime : 16;
+    lastTickTime = time;
+    scrollEnergy *= Math.exp(-elapsed / 180);
+    const isActive = scrollEnergy > 0.025;
+    const nextFrame = isActive ? Math.floor(time / 165) : 0;
+
+    if (nextFrame !== lastFrame || isActive !== wasActive) {
+      lastFrame = nextFrame;
+      frame = nextFrame;
+      wasActive = isActive;
+      renderAscii();
+    }
+
+    requestAnimationFrame(tick);
+  };
+
+  resizeGrid();
+  renderAscii();
+  requestAnimationFrame(tick);
+  window.addEventListener("resize", () => {
+    resizeGrid();
+    renderAscii();
+  });
+  window.addEventListener(
+    "scroll",
+    () => {
+      const nextScrollY = window.scrollY;
+      const scrollDelta = Math.abs(nextScrollY - lastScrollY);
+      lastScrollY = nextScrollY;
+
+      if (scrollDelta > 1) {
+        scrollEnergy = 1;
+      }
+    },
+    { passive: true },
+  );
+};
+
 const animateBackground = () => {
   currentScrollProgress +=
     (targetScrollProgress - currentScrollProgress) * 0.08;
@@ -122,23 +341,7 @@ const easeInOutCubic = (progress) => {
 };
 
 const smoothScrollTo = (targetY, duration = 1500) => {
-  const startY = window.scrollY;
-  const distance = targetY - startY;
-  const startTime = performance.now();
-
-  const step = (now) => {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const easedProgress = easeInOutCubic(progress);
-
-    window.scrollTo(0, startY + distance * easedProgress);
-
-    if (progress < 1) {
-      requestAnimationFrame(step);
-    }
-  };
-
-  requestAnimationFrame(step);
+  setSlowScrollTarget(targetY);
 };
 
 const revealObserver = new IntersectionObserver(
@@ -175,19 +378,97 @@ if (contactSection) {
 updateHeader();
 updateScrollProgress();
 syncNavigationState();
+setupAsciiGlobe();
+animateSlowScroll();
 animateBackground();
 
 window.addEventListener(
   "scroll",
   () => {
+    if (!isAutomatedScroll) {
+      currentScrollY = window.scrollY;
+      targetScrollY = window.scrollY;
+    }
+
     updateHeader();
     updateScrollProgress();
   },
   { passive: true },
 );
 
-window.addEventListener("resize", updateScrollProgress);
+window.addEventListener("resize", () => {
+  setSlowScrollTarget(targetScrollY);
+  updateScrollProgress();
+});
 window.addEventListener("pointermove", updateGlow);
+window.addEventListener(
+  "wheel",
+  (event) => {
+    if (shouldUseNativeScroll(event)) {
+      return;
+    }
+
+    event.preventDefault();
+    nudgeSlowScroll(event.deltaY);
+  },
+  { passive: false },
+);
+window.addEventListener(
+  "touchstart",
+  (event) => {
+    lastTouchY = event.touches[0]?.clientY || 0;
+  },
+  { passive: true },
+);
+window.addEventListener(
+  "touchmove",
+  (event) => {
+    if (shouldUseNativeScroll(event) || event.touches.length !== 1) {
+      return;
+    }
+
+    const nextTouchY = event.touches[0].clientY;
+    const deltaY = lastTouchY - nextTouchY;
+    lastTouchY = nextTouchY;
+    event.preventDefault();
+    nudgeSlowScroll(deltaY, 0.8);
+  },
+  { passive: false },
+);
+window.addEventListener("keydown", (event) => {
+  if (shouldUseNativeScroll(event)) {
+    return;
+  }
+
+  const keyScrollMap = {
+    ArrowDown: 82,
+    ArrowUp: -82,
+    PageDown: window.innerHeight * 0.72,
+    PageUp: -window.innerHeight * 0.72,
+    Space: window.innerHeight * (event.shiftKey ? -0.72 : 0.72),
+    Home: -Infinity,
+    End: Infinity,
+  };
+  const deltaY = keyScrollMap[event.code] ?? keyScrollMap[event.key];
+
+  if (deltaY === undefined) {
+    return;
+  }
+
+  event.preventDefault();
+
+  if (deltaY === Infinity) {
+    setSlowScrollTarget(getMaxScrollY());
+    return;
+  }
+
+  if (deltaY === -Infinity) {
+    setSlowScrollTarget(0);
+    return;
+  }
+
+  nudgeSlowScroll(deltaY, 1);
+});
 
 if (mobileNavQuery.addEventListener) {
   mobileNavQuery.addEventListener("change", syncNavigationState);
