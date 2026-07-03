@@ -95,6 +95,18 @@ body {
     0 0 24px color-mix(in srgb, var(--primary) 26%, transparent);
 }
 
+[data-theme="light"] .ascii-field {
+  opacity: 0.38;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="light"] .ascii-output {
+  color: color-mix(in srgb, var(--primary-strong) 72%, #151225);
+  text-shadow:
+    0 0 7px color-mix(in srgb, var(--primary) 20%, transparent),
+    0 0 20px color-mix(in srgb, var(--primary) 16%, transparent);
+}
+
 body::before,
 body::after {
   position: fixed;
