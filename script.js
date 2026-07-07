@@ -1,5 +1,7 @@
 const header = document.querySelector(".site-header");
-const glowCards = document.querySelectorAll(".glass-card");
+const glowCards = document.querySelectorAll(
+  ".profile-card.glass-card, .resume-panel.glass-card",
+);
 const revealItems = document.querySelectorAll("[data-reveal]");
 const anchorLinks = document.querySelectorAll('a[href^="#"]');
 const contactSection = document.querySelector("#contact");

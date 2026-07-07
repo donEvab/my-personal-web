@@ -575,13 +575,12 @@ h3 {
 .about-card,
 .project-card,
 .timeline-content {
-  --card-fill: var(--surface-solid);
   box-shadow: none;
 }
 
 .about-card {
   max-width: 760px;
-  padding: clamp(22px, 4vw, 34px);
+  padding: 0;
 }
 
 .about-card p,
@@ -729,15 +728,17 @@ h3 {
 }
 
 .project-grid {
+  gap: 30px 46px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .project-card {
-  min-height: 316px;
-  padding: 24px;
+  min-height: auto;
+  padding: 22px 0 0;
+  border-top: 1px solid var(--line);
   display: grid;
   align-content: space-between;
-  gap: 22px;
+  gap: 18px;
 }
 
 .project-card h3 {
@@ -801,7 +802,7 @@ h3 {
 }
 
 .timeline-content {
-  padding: 20px 22px;
+  padding: 0 0 22px;
 }
 
 .timeline-content h3,
@@ -1079,11 +1080,17 @@ h3 {
   }
 
   .profile-card,
-  .project-card,
-  .timeline-content,
-  .resume-panel,
-  .about-card {
+  .resume-panel {
     padding: 20px;
+  }
+
+  .about-card,
+  .timeline-content {
+    padding: 0;
+  }
+
+  .project-card {
+    padding: 20px 0 0;
   }
 
   .profile-card {
